@@ -1,0 +1,18 @@
+header,
+nz-content {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+nz-content {
+  padding: 1rem;
+}
+
+nz-layout {
+  min-height: 100vh;
+}
+
+header h2 {
+  color: white;
+}

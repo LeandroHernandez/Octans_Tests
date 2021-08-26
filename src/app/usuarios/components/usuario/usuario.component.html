@@ -1,0 +1,41 @@
+<nz-card nzTitle="Informacion del usuario">
+  <form nz-form [formGroup]="usuariosForm" (ngSubmit)="onSubmit()">
+    <nz-form-item>
+      <nz-form-control [nzErrorTip]="nombreErrorTpl">
+        <input type="text" nz-input formControlName="nombre" placeholder="nombre" />
+
+        <ng-template #nombreErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')"> Campo requerido </ng-container>
+          <ng-container *ngIf="control.hasError('minlength')"> Minimo 3 caracteres </ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control [nzErrorTip]="requiredErrorTpl">
+        <nz-select nzAllowClear nzPlaceHolder="Select a person" formControlName="rol">
+          <ng-container *ngFor="let rol of roles">
+            <nz-option [nzLabel]="rol.nombre" [nzValue]="rol.id"></nz-option>
+          </ng-container>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control [nzErrorTip]="requiredErrorTpl">
+        <nz-form-label> Activo </nz-form-label>
+        <nz-radio-group formControlName="activo">
+          <label nz-radio [nzValue]="true">Sí</label>
+          <label nz-radio [nzValue]="false">No</label>
+        </nz-radio-group>
+      </nz-form-control>
+    </nz-form-item>
+    <button nz-button [nzType]="'primary'">
+      {{ usuarioEdit ? "actializar" : "guardar" }}
+    </button>
+  </form>
+</nz-card>
+
+<ng-template #requiredErrorTpl let-control>
+  <ng-container *ngIf="control.hasError('required')"> Campo requerido </ng-container>
+</ng-template>

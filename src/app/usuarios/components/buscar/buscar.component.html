@@ -1,0 +1,24 @@
+
+          <nz-card nzTitle="Parametros de busqueda" >
+              <form nz-form nzLayout="vertical" >
+                  <nz-form-item>
+                      <nz-form-label>
+                          Nombre
+                      </nz-form-label>
+                      <nz-form-control
+                      [nzXs]="24"
+                      [nzSm]="22"
+                      nzErrorTip="Please input passenger's name or delete this field."
+                      >
+                      <input
+                       type="text"
+                       nz-input
+                       placeholder="Ingrese el nombre que desee consultar"
+                       >
+                      </nz-form-control>
+                  </nz-form-item>
+              <nz-divider></nz-divider>
+              <button nz-button style="margin-right: 20px;" type="submit" >Consultar</button>
+              <button nz-button type="button" >Limpiar</button>
+              </form>
+          </nz-card>

@@ -1,0 +1,64 @@
+<nz-card nzTitle="Lista de usuarios">
+  <button nz-button (click)="reset()" class="btn-clean">Limpiar busqueda</button>
+
+  <nz-table
+    #tableUser
+    nzShowSizeChanger
+    [nzData]="usuarios$ | async"
+    [nzFrontPagination]="true"
+    [nzLoading]="loading$ | async"
+    (nzQueryParams)="onQueryParamsChange($event)"
+  >
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th nzCustomFilter>
+          Nombre
+          <nz-filter-trigger
+            [(nzVisible)]="visible"
+            [nzActive]="searchValue.length > 0"
+            [nzDropdownMenu]="menu"
+          >
+            <i nz-icon nzType="search"></i>
+          </nz-filter-trigger>
+        </th>
+        <th nzColumnKey="activo" [nzFilters]="filterState" [nzFilterFn]="true">Activo</th>
+        <th nzColumnKey="rol" [nzFilters]="filterRol" [nzFilterFn]="true">Rol</th>
+        <th>Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of tableUser.data">
+        <td>{{ usuario.id }}</td>
+        <td>{{ usuario.nombre }}</td>
+        <td>{{ usuario.activo ? "si" : "no" }}</td>
+        <td>{{ usuario.rol.nombre }}</td>
+        <td>
+          <nz-button-group>
+            <button nz-button nzType="primary" (click)="editUser(usuario)">
+              <i nz-icon nzType="edit"></i>
+            </button>
+            <button
+              nz-button
+              nzDanger
+              nzOkType="danger"
+              nz-popconfirm
+              nzPopconfirmTitle="¿Desea eliminar el usuario?"
+              (nzOnConfirm)="deleteUser(usuario.id)"
+            >
+              <i nz-icon nzType="delete"></i>
+            </button>
+          </nz-button-group>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</nz-card>
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <div class="ant-table-filter-dropdown">
+    <div class="search-box">
+      <input type="text" nz-input placeholder="Buscar por nombre" [(ngModel)]="searchValue" />
+      <button nz-button nzBlock nzType="primary" (click)="search()">Buscar</button>
+    </div>
+  </div>
+</nz-dropdown-menu>

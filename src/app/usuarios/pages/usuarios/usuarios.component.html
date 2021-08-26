@@ -1,0 +1,17 @@
+<nz-layout>
+  <nz-header>
+    <header>
+      <h2>Gestion de usuarios</h2>
+    </header>
+  </nz-header>
+  <nz-content>
+    <div nz-row [nzGutter]="[16, 16]">
+      <div nz-col [nzSpan]="8">
+        <app-usuario></app-usuario>
+      </div>
+      <div nz-col [nzSpan]="16">
+        <app-listar (usarioEdit)="usarioEdit($event)"></app-listar>
+      </div>
+    </div>
+  </nz-content>
+</nz-layout>
